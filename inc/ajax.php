@@ -10,7 +10,7 @@ $paged=$_POST['paged'];
 
 if($_POST['action_type'] == 'loadmore' ){    
 
-     $posts_per_page=6; $h='315';$w='315';
+     $posts_per_page=1; $h='315';$w='315';
 
     $args_ajax = array(
 
@@ -100,7 +100,7 @@ if($_POST['action_type'] == 'loadmore_cat' ){
 
         }
 
-        $html=' <div class="tbeer-latest-item"><div class="tbeer-image-wrapper"><img src="'.esc_url($url).'" alt="'.esc_attr($text).'"></div><div class="tbeer-latest-post-details">'.trim( $output, $separator ).'<h3 class="tbeer-news-post-heading"><a href="'.get_the_permalink().'">'.get_the_title().'</a></h3>
+        $html=' <div class="tbeer-latest-article"><div class="tbeer-image-wrapper"><img src="'.esc_url($url).'" alt="'.esc_attr($text).'"></div><div class="tbeer-latest-article-details">'.trim( $output, $separator ).'<h3 class="tbeer-news-post-heading"><a href="'.get_the_permalink().'">'.get_the_title().'</a></h3>
         <p class="tbeer-news-post-excerpt">'.reported_the_excerpt_max_charlength(120).'</p><div class="tbeer-news-post-meta"><span class="tbeer-latest-post-date">'.date("m.d.y").'</span><div class="tbeer-news-post-author">'.get_the_author_posts_link().'</div></div></div></div>';
 
 
