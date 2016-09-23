@@ -58,7 +58,7 @@ class WP_Widget_Popular_Post_reported extends WP_Widget {
 
           ?>
 
-            <div class="tbeer-sidebar-widget-details">
+            <div class="tbeer-sidebar-widget-details" id="trending_posts">
 
             <?php while ( $r->have_posts() ) : $r->the_post(); ?>
 
@@ -104,15 +104,25 @@ class WP_Widget_Popular_Post_reported extends WP_Widget {
 
                </div>
 
-              <?php endwhile; ?>
-
+              <?php endwhile; 
+              $style="";
+            if($r->found_posts<=$number)
+            {
+              $style="display:none";
+            }
+            $total_post_trending = $r->found_posts;
+            $raw_page = $total_post_trending%$number;
+            if($raw_page==0){$page_count_raw = $total_post_trending/$number; }else{$page_count_raw = $total_post_trending/$number+1;}
+               $page_count = floor($page_count_raw);
+            ?>
+            <div class="tbeer-load-more-wrapper" id="loadmore_trending" style="<?php echo $style;?>">
+                <input type="hidden" value="2" id="paged_trending">
+                <input type="hidden" value="<?php echo $number?>" id="post_per_page_trending">
+                <input type="hidden" value="<?php echo $page_count;?>" id="max_paged_trending">
+                <a href="javascript:void(0);" class="tbeer-btn tbeer-load-more"><?php _e('Load More','reported')?></a>
             </div>
-
-          <?php endif;?>
-
-        <?php  wp_reset_postdata(); ?>
-
-        <?php  $content = ob_get_clean();
+        </div>
+          <?php endif; wp_reset_postdata();  $content = ob_get_clean();
 
         wp_cache_set('popular_post', $cache, 'widget');
 
