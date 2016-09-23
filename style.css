@@ -1,0 +1,253 @@
+/*
+Theme Name: Reported
+Description: Reported is a Premium Wordpress Theme with a unique design and fully CMS features. No matter if you use it as a photographer, travel / web design agency, nonprofit / environmental organization or even as a music / video producer. You can easily turn it into your personal website.
+Author:
+Author URI:
+Version: 1.0
+Tags:
+Theme URI:
+License:
+License URI:
+Text Domain: Reported
+*/
+/*Custom css by rafin*/
+.cap-btn a {
+    color: #fff;
+}
+ul.children {
+    padding-left: 65px;
+}
+#reply-title{
+  display: none;
+}
+.reply-box a {
+    color: #000;
+}
+#comment-submit{
+  display: none;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
+    background-color: #fff;
+}
+.article-main .pagination-holder .right-pagination a:after {
+    left: auto;
+    right: 5px;
+    content: "\e907";
+}
+.article-main .pagination-holder .right-pagination a:before {
+    left: auto;
+    right: 0;
+}
+.article-main .pagination-holder .right-pagination a {
+    padding-left: 0;
+    padding-right: 50px;
+}
+
+.navbar-fixed-top {
+    top: inherit;
+}
+/* =WordPress Core
+-------------------------------------------------------------- */
+.alignnone {
+    margin: 5px 20px 20px 0;
+}
+
+.aligncenter,
+div.aligncenter {
+    display: block;
+    margin: 5px auto 5px auto;
+}
+
+.alignright {
+    float:right;
+    margin: 5px 0 20px 20px;
+}
+
+.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+
+a img.alignright {
+    float: right;
+    margin: 5px 0 20px 20px;
+}
+
+a img.alignnone {
+    margin: 5px 20px 20px 0;
+}
+
+a img.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+
+a img.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.wp-caption {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    max-width: 96%; /* Image does not overflow the content area */
+    padding: 5px 3px 10px;
+    text-align: center;
+}
+
+.wp-caption.alignnone {
+    margin: 5px 20px 20px 0;
+}
+
+.wp-caption.alignleft {
+    margin: 5px 20px 20px 0;
+}
+
+.wp-caption.alignright {
+    margin: 5px 0 20px 20px;
+}
+
+.wp-caption img {
+    border: 0 none;
+    height: auto;
+    margin: 0;
+    max-width: 98.5%;
+    padding: 0;
+    width: auto;
+}
+
+.wp-caption p.wp-caption-text {
+    font-size: 11px;
+    line-height: 17px;
+    margin: 0;
+    padding: 0 4px 5px;
+}
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+.screen-reader-text:focus {
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    clip: auto !important;
+    color: #21759b;
+    display: block;
+    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    height: auto;
+    left: 5px;
+    line-height: normal;
+    padding: 15px 23px 14px;
+    text-decoration: none;
+    top: 5px;
+    width: auto;
+    z-index: 100000; /* Above WP toolbar. */
+}
+/*custom css nishan*/
+.tbeer-featured-news .tbeer-news-details .tbeer-category-meta a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    color: #fffefe;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 20px;
+    background-color: #48beed;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.tbeer-latest-post-section .tbeer-latest-post-wrapper .tbeer-main-content .tbeer-latest-item .tbeer-latest-post-details .tbeer-category-meta a{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    color: #48beed;
+    line-height: 1;
+    height: auto;
+    padding: 0;
+    background-color: transparent;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -o-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.tbeer-post-title-metas .tbeer-category-meta a {
+    padding: 0 15px;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    -o-border-radius: 0px !important;
+    border-radius: 0px !important;
+}
+
+.tbeer-post-title-metas .tbeer-category-meta a{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    color: #fffefe;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 20px;
+    background-color: #48beed;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-radius: 15px;
+}
+
+
+.tbeer-search-result-section .tbeer-single-post-wrapper .tbeer-main-content .tbeer-search-result .tbeer-search-result-details .tbeer-category-meta a {
+    color: #48beed;
+}
+
+.tbeer-search-result-section .tbeer-main-content .tbeer-load-more-wrapper a {
+    padding: 0;
+    display: inline-block;
+    padding: 0 100px;
+    height: 60px;
+    line-height: 60px;
+    background-color: #ffffff;
+    color: #c1c1c1;
+    border: 1px solid #ebebeb;
+    overflow: hidden;
+    text-align: center;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -o-border-radius: 30px;
+    border-radius: 30px;
+    -webkit-transition: all 0.35s ease;
+    -moz-transition: all 0.35s ease;
+    -ms-transition: all 0.35s ease;
+    -o-transition: all 0.35s ease;
+    transition: all 0.35s ease;
+}
+footer .tbeer-footer-top .tbeer-footer-widgets-area .tbeer-footer-widget ul li {
+    display: block;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+footer .tbeer-footer-top .tbeer-footer-widgets-area .tbeer-footer-widget ul li a {
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    color: #929292;
+    line-height: 1;
+    -webkit-transition: all 0.35s ease;
+    -moz-transition: all 0.35s ease;
+    -ms-transition: all 0.35s ease;
+    -o-transition: all 0.35s ease;
+    transition: all 0.35s ease;
+}
+
+
+footer .tbeer-footer-top .tbeer-footer-widgets-area .tbeer-footer-widget ul li a:hover {
+    color: #48beed;
+}
