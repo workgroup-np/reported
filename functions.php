@@ -1110,11 +1110,13 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
 
 
-            $title             = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
+            $headline_title    = isset($instance['headline_title'])? $instance['headline_title'] : '';
 
             $post_category     = ! empty( $instance['post_category'] ) ? $instance['post_category'] : 0;
 
             $display_headlines = ( $instance[ 'display_headlines' ] == 1) ? 'true' : 'false';
+
+            $number            =  empty($instance['number'])? 9 : $instance['number'];
 
 
             echo $args['before_widget'];
@@ -1169,7 +1171,6 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
         }
 
-                $header_query= new WP_Query($header_args);
 
                 $header_query= new WP_Query($header_args);
 
@@ -1260,20 +1261,65 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
                         endwhile;
 
-                         echo   '</div>
-
-                            </div>
-
-                        </div>
-
-                    </section>';
-
+                         echo   '</div>';
 
                 endif;
 
-               ?>
+                wp_reset_postdata();
 
-            <?php
+                if($display_headlines == "true"):
+
+                echo '<div class="tbeer-top-headlines-wrapper">';
+
+                    if( !empty($headline_title) ):?>
+                    <h3><?php echo esc_html($headline_title);?></h3>
+
+                    <?php var_dump($number); endif;
+
+                    $header_args=array(
+
+                        'post_type'=>'post',
+
+                        'posts_per_page'=>5,
+
+                        'orderby' => 'date',
+
+                        'order'   => 'DESC',
+
+                    );
+
+                    $header_query= new WP_Query($header_args);
+
+                    if($header_query->have_posts()):?>
+
+
+                        <ul class="tbeer-top-headlines-heading">
+
+                       <?php while($header_query->have_posts()):
+
+                            $header_query->the_post();
+
+                    ?>
+                        <li><a href="<?php the_permalink();?>"><?php the_title();?>...</a></li>
+
+                <?php endwhile; ?>
+
+                    </ul>
+
+
+                    <?php endif;//end post loop
+
+                    wp_reset_postdata();
+
+                    echo '</div>';
+
+                endif;//end $display_headlines
+
+                echo '</div>
+
+                    </div>
+
+                </section>';
 
             echo $args['after_widget'];
 
@@ -1307,15 +1353,13 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
             $instance = $old_instance;
 
-
-
-            $instance['title']             = sanitize_text_field( $new_instance['title'] );
+            $instance['headline_title']    = strip_tags( $new_instance['headline_title'] );
 
             $instance['post_category']     = absint( $new_instance['post_category'] );
 
             $instance['display_headlines'] = isset( $new_instance[ 'display_headlines' ] ) ? 1 : 0;
 
-
+            $instance['number']            = absint( $new_instance['number'] );
 
             return $instance;
 
@@ -1340,20 +1384,21 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
         function form( $instance ) {
 
             // Defaults.
-
-            $defaults['title'] = '';
-            $defaults['post_category'] = '';
+            $defaults['post_category']     = '';
             $defaults['display_headlines'] = '';
+            $defaults['headline_title']    = '';
+            $defaults['number']            = 8;
+
 
             $instance = wp_parse_args( (array) $instance,$defaults);
 
-
-
-            $title             = esc_attr( $instance['title'] );
+            $headline_title    = esc_html( $instance['headline_title'] );
 
             $post_category     = absint( $instance['post_category'] );
 
-            $display_headlines  = empty($instance['display_headlines']) ? 'checked="checked"' : '';
+            $display_headlines = $instance['display_headlines'] ? 'checked="checked"' : '';
+
+            $number            = absint($instance['number']); 
 
             ?>
 
@@ -1389,8 +1434,24 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
             <p>
             <label for="<?php echo esc_attr( $this->get_field_id( 'display_headlines' ) ); ?>"><?php _e( 'Display Top Headlines section:', 'reported' ); ?></label>
-            <input class="checkbox" type ="checkbox" <?php echo $display_headlines; ?> id="<?php echo esc_attr( $this->get_field_id( 'headlines_section' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'display_headlines' ) ); ?>"/>
+            <input class="checkbox" type ="checkbox" <?php echo $display_headlines; ?> id="<?php echo esc_attr( $this->get_field_id( 'display_headlines' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'display_headlines' ) ); ?>"/>
             </p>
+            <p>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'headline_title' ) ); ?>">
+            <?php _e( 'Enter title for headlines section', 'reported' ); ?></label>
+            <input id="<?php echo esc_attr( $this->get_field_id( 'headline_title' ) ); ?>" type="text" 
+            name="<?php echo esc_attr( $this->get_field_name( 'headline_title' ) ); ?>" 
+            value="<?php esc_attr_e($headline_title);?>"/>
+            </p>
+            <p>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'headline_number' ) ); ?>">
+            <?php _e( 'Number of posts to display:', 'reported' ); ?></label>
+            <input id="<?php echo esc_attr( $this->get_field_id( 'headline_number' ) ); ?>" 
+            type="text" name="<?php echo esc_attr( $this->get_field_name( 'headline_number' ) ); ?>" 
+            value="<?php esc_attr_e($number);?>"/>
+            </p>
+
+
 
             <?php
 

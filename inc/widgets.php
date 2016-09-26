@@ -1,5 +1,5 @@
 <?php
-
+register_widget('WP_Widget_Popular_Post_reported');#
 /* Code for Popular Posts widget*/
 
 class WP_Widget_Popular_Post_reported extends WP_Widget {
@@ -178,8 +178,5 @@ class WP_Widget_Popular_Post_reported extends WP_Widget {
 
     }
 
-
-
 }
 
-register_widget('WP_Widget_Popular_Post_reported');
