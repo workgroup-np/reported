@@ -212,25 +212,6 @@ function reported_widgets_setup() {
 
         ));
 
-          register_sidebar(array(
-
-            'name' => "Footer Block Widgets Here",
-
-            'id' => "reported-widgets-footer-block-1",
-
-            'description' => __('Widgets placed here will display in the footer block', 'reported'),
-
-            'before_widget' => '<div id="%1$s" class="widget %2$s tbeer-footer-widget tbeer-links-widget">',
-
-            'after_widget'  => '</div>',
-
-            'before_title'  => '<h3 class="tbeer-footer-widget-title">',
-
-            'after_title'   => '</h3>'
-
-        ));
-
-
 
     endif;
 
@@ -383,7 +364,7 @@ function reported_load_theme_assets() {
 
     } else {
 
-    $main_custom_color_primary= "#48beed";
+    $main_custom_color_primary= "#EF3239";
 
     }
 
@@ -393,10 +374,12 @@ function reported_load_theme_assets() {
 
     } else {
 
-    $main_custom_color_hover= "#48beed";
+    $main_custom_color_hover= "#EF3239";
 
     }
 
+    if($main_custom_color_primary!="#EF3239" || $main_custom_color_hover != "#EF3239")
+    {
     $color_variation='
 
         ::selection {
@@ -614,7 +597,8 @@ function reported_load_theme_assets() {
         ';
 
     wp_add_inline_style( 'reported-color-style', $color_variation );
-
+    
+    }
 
 
   }
@@ -1002,19 +986,7 @@ function reported_post_meta() {
 
         'desc' => 'Check if post is featured post.',
 
-    ) );$cmb->add_field( array(
-
-        'name' => 'Must Post',
-
-        'id'   => '_reported_must',
-
-        'type' => 'checkbox',
-
-        'desc' => 'Check if post is must read post.',
-
     ) );
-
-
 
 }
 
@@ -1142,6 +1114,7 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
             $post_category     = ! empty( $instance['post_category'] ) ? $instance['post_category'] : 0;
 
+            $display_headlines = ( $instance[ 'display_headlines' ] == 1) ? 'true' : 'false';
 
 
             echo $args['before_widget'];
@@ -1172,7 +1145,7 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
                 'post_type'=>'post',
 
-                'posts_per_page'=>5,
+                'posts_per_page'=>4,
 
                 'orderby' => 'date',
 
@@ -1224,27 +1197,19 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
                             $alt = get_post_meta($thumbnail, '_wp_attachment_image_alt', true);
 
-                            $w=($i==1 || $i==4)?"585":"293";
-                            $h=($i==2 || $i==3)?"804":"402";
+                            $w=($i==1)? "800" : "273";
+                            $h=($i!=1)?"1100":"376";
                             $featured_class="";
                             if( $i==1 )
                             {
 
-                              $featured_class="tbeer-halfscreen-featured-news";
+                              $featured_class="tbeer-fullwidth-featured-news";
 
                             }
-
-                            elseif( $i==2 || $i==3 )
+                            else
                             {
 
                                 $featured_class="";
-
-                            }
-
-                            else 
-                            {
-
-                                $featured_class="tbeer-fullwidth-featured-news";
 
                             }
 
@@ -1264,7 +1229,7 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
                                     <div class="tbeer-featured-img">
 
-                                        <img src="<?php echo esc_url($url);?>" alt="<?php echo esc_attr($alt);?>">
+                                     <img src="<?php echo esc_url($url);?>" alt="<?php echo esc_attr($alt);?>">
 
                                     </div>
 
@@ -1280,7 +1245,9 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
                                         <div class="tbeer-news-post-meta">
 
-                                            <span class="tbeer-news-post-date"><?php _e('by ','reported');the_author_posts_link(); ?></span>
+                                            <span class="tbeer-news-post-date"><?php echo date("m.d.y");  ?>
+                                            </span>
+                                            <?php the_author_posts_link(); ?>
 
                                         </div>
 
@@ -1300,6 +1267,7 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
                         </div>
 
                     </section>';
+
 
                 endif;
 
@@ -1345,6 +1313,8 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
             $instance['post_category']     = absint( $new_instance['post_category'] );
 
+            $instance['display_headlines'] = isset( $new_instance[ 'display_headlines' ] ) ? 1 : 0;
+
 
 
             return $instance;
@@ -1371,15 +1341,11 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
             // Defaults.
 
-            $instance = wp_parse_args( (array) $instance, array(
+            $defaults['title'] = '';
+            $defaults['post_category'] = '';
+            $defaults['display_headlines'] = '';
 
-                'title'             => '',
-
-                'post_category'     => '',
-
-
-
-            ) );
+            $instance = wp_parse_args( (array) $instance,$defaults);
 
 
 
@@ -1387,9 +1353,7 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
             $post_category     = absint( $instance['post_category'] );
 
-
-
-
+            $display_headlines  = empty($instance['display_headlines']) ? 'checked="checked"' : '';
 
             ?>
 
@@ -1421,6 +1385,11 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
                 ?>
 
+            </p>
+
+            <p>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'display_headlines' ) ); ?>"><?php _e( 'Display Top Headlines section:', 'reported' ); ?></label>
+            <input class="checkbox" type ="checkbox" <?php echo $display_headlines; ?> id="<?php echo esc_attr( $this->get_field_id( 'headlines_section' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'display_headlines' ) ); ?>"/>
             </p>
 
             <?php

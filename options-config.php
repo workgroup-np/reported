@@ -506,7 +506,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
 
                     array(
 
-                        'id'        => 'logo',
+                        'id'        => 'logo-image',
 
                         'type'      => 'media',
 

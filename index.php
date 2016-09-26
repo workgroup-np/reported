@@ -8,43 +8,10 @@ global $reported_options;
 $style="";
 if ( is_active_sidebar( 'reported-banner-sidebar' ) ) : 
     dynamic_sidebar('reported-banner-sidebar');
-endif;
+endif;?>
 
-$trending_args=array('posts_per_page'=>-1,'meta_key'=>'post_views_count','orderby'=>'meta_value_num','order'=>'DESC');
-global $wpdb;
-$trending_query= new WP_Query($trending_args);
-if($trending_query->have_posts()):
-echo '<section class="tbeer-trending-news-section">
-        <div class="container">
-          <div class="row">
-        <h3 class="tbeer-section-heading">Trending Now</h3>
-
-        <div class="tbeer-trending-news-wrapper">
-            <ul id="tbeer-news-ticker">';
-            while($trending_query->have_posts()):
-                $trending_query->the_post();
-                    $view=get_post_meta(get_the_ID(),'post_views_count',true);
-                    if($view!=0)
-                    echo '<li><a href="'.get_the_permalink().'">'.get_the_title().'</a></li>';
-
-            endwhile;
-
-        echo '</ul>
-        </div>
-        <div class="tbeer-trending-news-nav">
-        <a href="#!" class="tbeer-trending-prev-news">
-                <i class="fa fa-angle-left"></i>
-            </a>
-            <a href="#!" class="tbeer-trending-next-news">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        </div>
-      </div>
-    </div>
-</section>';
-endif; wp_reset_postdata();?>
   <!-- LATEST ARTICLE SECTION -->
-        <section class="tbeer-latest-post-section tbeer-section">
+        <section class="tbeer-latest-and-trending-article-section tbeer-section">
             <div class="container">
                 <div class="row">
                     <div class="tbeer-latest-post-wrapper">
@@ -53,11 +20,10 @@ endif; wp_reset_postdata();?>
                     $lateset_posts = new WP_Query( $latest_args );
                     if($lateset_posts->have_posts()): 
                         echo '<div class="tbeer-main-content col-md-8 col-sm-8 col-xs-12">
-                                <h3 class="tbeer-section-title">Latest Articles</h3>
-                                    <div id="latest_post" class="tbeer-post-wrapper">';
+                                    <div class="tbeer-latest-article-wrapper">';
                                         while ( $lateset_posts->have_posts()) : $lateset_posts->the_post();?>
                                              <!-- Latest Article -->
-                                            <div class="tbeer-latest-item">
+                                            <div class="tbeer-latest-article">
                                             <?php
                                                 $thumbnail = get_post_thumbnail_id($post->ID);
                                                 $img_url = wp_get_attachment_image_src( $thumbnail,'full');
