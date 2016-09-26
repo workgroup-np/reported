@@ -1108,15 +1108,7 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
         function widget( $args, $instance ) {
 
-
-
-            $headline_title    = isset($instance['headline_title'])? $instance['headline_title'] : '';
-
             $post_category     = ! empty( $instance['post_category'] ) ? $instance['post_category'] : 0;
-
-            $display_headlines = ( $instance[ 'display_headlines' ] == 1) ? 'true' : 'false';
-
-            $number            =  empty($instance['number'])? 9 : $instance['number'];
 
 
             echo $args['before_widget'];
@@ -1267,6 +1259,12 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
                 wp_reset_postdata();
 
+                $headline_title    = isset($instance['headline_title'])? $instance['headline_title'] : '';
+
+                $display_headlines = ( $instance[ 'display_headlines' ] == 1) ? 'true' : 'false';
+
+                $number            = !empty($instance['headline_number'])? $instance['headline_number'] : 0;
+
                 if($display_headlines == "true"):
 
                 echo '<div class="tbeer-top-headlines-wrapper">';
@@ -1274,13 +1272,13 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
                     if( !empty($headline_title) ):?>
                     <h3><?php echo esc_html($headline_title);?></h3>
 
-                    <?php var_dump($number); endif;
+                    <?php endif;
 
                     $header_args=array(
 
                         'post_type'=>'post',
 
-                        'posts_per_page'=>5,
+                        'posts_per_page'=>$number,
 
                         'orderby' => 'date',
 
@@ -1359,7 +1357,8 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
             $instance['display_headlines'] = isset( $new_instance[ 'display_headlines' ] ) ? 1 : 0;
 
-            $instance['number']            = absint( $new_instance['number'] );
+            $instance['headline_number']            = absint($new_instance['headline_number']);
+
 
             return $instance;
 
@@ -1387,7 +1386,7 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
             $defaults['post_category']     = '';
             $defaults['display_headlines'] = '';
             $defaults['headline_title']    = '';
-            $defaults['number']            = 8;
+            $defaults['headline_number']   = 5;
 
 
             $instance = wp_parse_args( (array) $instance,$defaults);
@@ -1398,7 +1397,7 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
             $display_headlines = $instance['display_headlines'] ? 'checked="checked"' : '';
 
-            $number            = absint($instance['number']); 
+            $number            = esc_html($instance['headline_number']); 
 
             ?>
 
@@ -1429,13 +1428,13 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
                 wp_dropdown_categories( $cat_args );
 
                 ?>
-
             </p>
 
             <p>
             <label for="<?php echo esc_attr( $this->get_field_id( 'display_headlines' ) ); ?>"><?php _e( 'Display Top Headlines section:', 'reported' ); ?></label>
             <input class="checkbox" type ="checkbox" <?php echo $display_headlines; ?> id="<?php echo esc_attr( $this->get_field_id( 'display_headlines' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'display_headlines' ) ); ?>"/>
             </p>
+
             <p>
             <label for="<?php echo esc_attr( $this->get_field_id( 'headline_title' ) ); ?>">
             <?php _e( 'Enter title for headlines section', 'reported' ); ?></label>
@@ -1443,6 +1442,7 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
             name="<?php echo esc_attr( $this->get_field_name( 'headline_title' ) ); ?>" 
             value="<?php esc_attr_e($headline_title);?>"/>
             </p>
+
             <p>
             <label for="<?php echo esc_attr( $this->get_field_id( 'headline_number' ) ); ?>">
             <?php _e( 'Number of posts to display:', 'reported' ); ?></label>
