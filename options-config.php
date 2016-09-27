@@ -494,18 +494,6 @@ if (!class_exists('Redux_Framework_sample_config')) {
 
                     array(
 
-                        'id'        => 'custom_color_hover',
-
-                        'type'      => 'color',
-
-                        'title'     => __('Hover Color', 'reported'),
-
-                        'subtitle'  => __('Choose a hover color for your theme.', 'reported'),
-
-                        ),
-
-                    array(
-
                         'id'        => 'logo',
 
                         'type'      => 'media',
