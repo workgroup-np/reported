@@ -492,9 +492,10 @@ if (!class_exists('Redux_Framework_sample_config')) {
 
                         ),
 
+
                     array(
 
-                        'id'        => 'custom_color_hover',
+                        'id'        => 'logo-image',
 
                         'type'      => 'color',
 
@@ -504,23 +505,6 @@ if (!class_exists('Redux_Framework_sample_config')) {
 
                         ),
 
-                    array(
-
-                        'id'        => 'logo-image',
-
-                        'type'      => 'media',
-
-                        'title'     => __('Logo Normal', 'reported'),
-
-                        'compiler'  => 'true',
-
-                        'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
-
-                        'subtitle'  => __('Upload header logo for your website', 'reported'),
-
-
-
-                    ),
 
                     array(
 
@@ -1022,20 +1006,9 @@ if (!class_exists('Redux_Framework_sample_config')) {
 
                     ),
 
-
-
-
-
-
-
                 )
 
             );
-
-
-
-
-
 
 
             $this->sections[] = array(
@@ -1066,21 +1039,9 @@ if (!class_exists('Redux_Framework_sample_config')) {
 
                     ),
 
-
-
-
-
                 )
 
             );
-
-
-
-
-
-
-
-
 
             $this->sections[] = array(
 
@@ -1109,13 +1070,6 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 ),
 
             );
-
-
-
-
-
-
-
         }
 
 
@@ -1327,10 +1281,6 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 )
 
             );
-
-
-
-
 
             // SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
 
