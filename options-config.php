@@ -614,30 +614,6 @@ if (!class_exists('Redux_Framework_sample_config')) {
 
                         array(
 
-                            'id'        => 'right_must_read',
-
-                            'type'      => 'text',
-
-                            'title'     => __('Number of must read posts in number(right side)', 'reported'),
-
-                            'default'   => '5',
-
-                        ), array(
-
-                            'id'        => 'left_must_read',
-
-                            'type'      => 'text',
-
-                            'title'     => __('Number of must read posts in list view(left side) ', 'reported'),
-
-                            'default'   => '3',
-
-                        ), 
-
-
-
-                        array(
-
                             'id'        => 'single_blog',
 
                             'type'      => 'switch',

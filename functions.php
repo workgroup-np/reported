@@ -1357,7 +1357,7 @@ if ( ! class_exists( 'Reported_Recent_Posts_Widget' ) ) :
 
             $instance['display_headlines'] = isset( $new_instance[ 'display_headlines' ] ) ? 1 : 0;
 
-            $instance['headline_number']            = absint($new_instance['headline_number']);
+            $instance['headline_number']   = absint($new_instance['headline_number']);
 
 
             return $instance;

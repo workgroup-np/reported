@@ -147,15 +147,15 @@ jQuery('body').on('click','#loadmore a',function(){
 
 });
 
-jQuery('body').on('click','#loadmore_cat a',function(){
+jQuery('body').on('click','#loadmore_trending a',function(){
 
-    var paged = jQuery('#paged').val();var cat_id = jQuery('#cat_id').val();
+    var paged = jQuery('#paged_trending').val();
 
     var next_num =parseInt(paged)+1;
 
-    jQuery('#paged').val(next_num);
+    jQuery('#paged_trending').val(next_num);
 
-    var max_paged =jQuery('#max_paged').val();
+    var max_paged =jQuery('#max_paged_trending').val();
 
     console.log(max_paged);
 
@@ -173,11 +173,11 @@ jQuery('body').on('click','#loadmore_cat a',function(){
 
         type: 'POST',
 
-        data: 'action_type=loadmore_cat&cat_id='+cat_id+'&paged='+paged,
+        data: 'action_type=loadmore_trending&paged='+paged,
 
         beforeSend:function(xhr){
 
-          jQuery('#loadmore_cat a').html('Loading..');
+          jQuery('#loadmore_trending a').html('Loading..');
 
         }
 
@@ -187,15 +187,15 @@ jQuery('body').on('click','#loadmore_cat a',function(){
 
         console.log(result);
 
-        jQuery("#latest_post").append(result);
+        jQuery("#trending_posts").append(result);
 
         if (parseInt(paged) == parseInt(max_paged))
 
         {
 
-          jQuery("#loadmore_cat a").hide();
+          jQuery("#loadmore_trending a").hide();
 
-          jQuery("#loadmore_cat a").html('Load More');
+          jQuery("#loadmore_trending a").html('Load More');
 
         }
 
@@ -203,9 +203,9 @@ jQuery('body').on('click','#loadmore_cat a',function(){
 
         {
 
-          jQuery("#loadmore_cat a").show();
+          jQuery("#loadmore_trending a").show();
 
-          jQuery("#loadmore_cat a").html('Load More');
+          jQuery("#loadmore_trending a").html('Load More');
 
         }
 
