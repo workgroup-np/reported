@@ -52,7 +52,7 @@ endif; wp_reset_postdata();?>
             $lateset_posts = new WP_Query( $latest_args );
             if($lateset_posts->have_posts()): 
                 echo '<div class="tbeer-main-content col-md-8 col-sm-8 col-xs-12">
-                            <div id="latest_post" class="tbeer-latest-article-wrapper">';
+                            <div id="latest_post" class="tbeer-latest-article-wrapper" id="lateset_posts">';
                                 while ( $lateset_posts->have_posts()) : $lateset_posts->the_post();?>
                                      <!-- Latest Article -->
                                     <div class="tbeer-latest-article">

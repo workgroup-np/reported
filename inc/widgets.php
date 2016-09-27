@@ -81,7 +81,6 @@ class WP_Widget_Popular_Post_reported extends WP_Widget {
                         $n_img = aq_resize( $img_url[0], $width =310, $height = 310, $crop = true, $single = true, $upscale = true );
 
                         ?>
-
                         <img src="<?php echo esc_url($n_img);?>"  alt="<?php echo esc_attr($alt);?>">
 
                         <?php else:
@@ -104,7 +103,7 @@ class WP_Widget_Popular_Post_reported extends WP_Widget {
 
                </div>
 
-              <?php endwhile; 
+              <?php endwhile; /*
               $style="";
             if($r->found_posts<=$number)
             {
@@ -120,7 +119,7 @@ class WP_Widget_Popular_Post_reported extends WP_Widget {
                 <input type="hidden" value="<?php echo $number?>" id="post_per_page_trending">
                 <input type="hidden" value="<?php echo $page_count;?>" id="max_paged_trending">
                 <a href="javascript:void(0);" class="tbeer-btn tbeer-load-more"><?php _e('Load More','reported')?></a>
-            </div>
+            </div> */?>
         </div>
           <?php endif; wp_reset_postdata();  $content = ob_get_clean();
 
